@@ -2,12 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 import productsRoute from "./routes/productsRoute.js"
 import bodyParser from "body-parser"
+import connectDB from "./config/database.js";
 
 
 const app = express();
 app.use(bodyParser.urlencoded())
 app.use(bodyParser.json())
 dotenv.config();
+connectDB();
 const PORT = process.env.PORT ;
 
 app.get("/",(req,res)=>{

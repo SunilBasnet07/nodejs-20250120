@@ -1,22 +1,29 @@
 import fs from "fs";
+import Product from "../models/Product.js";
 
 
-const rawData = fs.readFileSync('./data/products.json','utf-8');
-const products= JSON.parse(rawData);
 
-const getAllProducts=()=>{
-return products;
+const getAllProducts= async()=>{
+return await Product.find();
 }
 
-const getProductById=(id)=>{
-const productId= products.find((p)=> p.id==id)
-return productId;
+const getProductById= async (id)=>{
+return await Product.findById(id);
 }
+const getCategories = async ()=>{
+    return await Product.distinct("category");
+ }
 
-const createProduct=(data)=>{
-products.push(data);
-fs.writeFileSync('./data/products.json',JSON.stringify(products));
-return "product added successfully."
+const createProduct= async(data)=>{
+    return await Product.create(data);
+
 } 
+const updateProduct = async (id,data)=>{
+   return await Product.findByIdAndUpdate(id,data);
+}
+const deleteProduct = async (id)=>{
+    return await Product.findByIdAndDelete(id);
+ }
 
-export default {getAllProducts,getProductById,createProduct}
+
+export default {getAllProducts,getProductById,createProduct,updateProduct,deleteProduct,getCategories }
