@@ -21,9 +21,9 @@ import fs from "fs";
 // async
  
 //1. Read
-const result = fs.readFile('data.txt','utf-8',(error,data)=>{
-if(error) console.log(error)
-  console.log(data)
-});
+// const result = fs.readFile('data.txt','utf-8',(error,data)=>{
+// if(error) console.log(error)
+//   console.log(data)
+// });
 
-console.log("nodejs with express");
+// console.log("nodejs with express");

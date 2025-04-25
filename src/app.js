@@ -1,7 +1,14 @@
 import express from "express";
+import dotenv from "dotenv";
+import productsRoute from "./routes/productsRoute.js"
+import bodyParser from "body-parser"
+
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+app.use(bodyParser.urlencoded())
+app.use(bodyParser.json())
+dotenv.config();
+const PORT = process.env.PORT ;
 
 app.get("/",(req,res)=>{
   res.json({
@@ -10,16 +17,8 @@ app.get("/",(req,res)=>{
     "port":"500",
   })
 })
-app.get("/about",(req,res)=>{
-    res.send("This is about page")
-})
-app.get("/products",(req,res)=>{
-res.send("Products");
-})
-app.get("/products/:id",(req,res)=>{
-    const id= req.params.id;
-    res.send(`Product of Id : ${id}`);
-})
+
+app.use("/api/products",productsRoute)
 
 app.listen(PORT,()=>{
     console.log(`Server is running at port ${PORT}`);
