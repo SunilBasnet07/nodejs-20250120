@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import productsRoute from "./routes/productsRoute.js"
+import usersRoute from "./routes/usersRoute.js"
 import bodyParser from "body-parser"
 import connectDB from "./config/database.js";
 
@@ -21,6 +22,7 @@ app.get("/",(req,res)=>{
 })
 
 app.use("/api/products",productsRoute)
+app.use("/api/users",usersRoute)
 
 app.listen(PORT,()=>{
     console.log(`Server is running at port ${PORT}`);
