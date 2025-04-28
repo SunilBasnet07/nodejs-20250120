@@ -43,7 +43,7 @@ const deleteUser=async(req,res)=>{
     const id = req.params.id;
    await userService.deleteUser(id);
     res.json(`User of this ${id} id deleted successfully.`);
-  } catch (error) {
+  } catch (error) { 
     res.status(500).send(error.message);
   }
 };

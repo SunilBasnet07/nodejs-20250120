@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { EMAIL_REGEX, PASSWORD_REGEX } from "../constant/regex.js";
+import { EMAIL_REGEX } from "../constant/regex.js";
+import { ADMIN_ROLES, MERCHANT_ROLES, USER_ROLES } from "../constant/roles.js";
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -22,22 +23,27 @@ const userSchema = new mongoose.Schema({
             message: "Please provide a valid email address"
         }
     },
+    number: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     password: {
         type: String,
         required: true,
         minlength: 8,
-        validate:{
-            validator:(value)=>{
-             return PASSWORD_REGEX.test(value);
-            },
-            message:"Password must be contain upercase lowercase and special charater"
-        }
 
+
+    },
+    confirmPassword: {
+        type: String,
+        minlength: 8,
     },
     roles: {
         type: [String],
         uppercase: true,
-        default: ["USER"]
+        default: [USER_ROLES],
+        enum:[USER_ROLES,MERCHANT_ROLES,ADMIN_ROLES]
 
     },
     createdAt: {
