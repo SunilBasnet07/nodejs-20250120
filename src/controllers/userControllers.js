@@ -1,3 +1,4 @@
+import { formatterUserData } from "../helper/formatter.js";
 import userService from "../services/userService.js";
 
 
@@ -47,4 +48,18 @@ const deleteUser=async(req,res)=>{
     res.status(500).send(error.message);
   }
 };
-export {createUser,getAllUsers,getUserById,updateUser,deleteUser}
+
+const uploadProfileImage = async(req,res)=>{
+ try {
+  const file = req.file;
+  const userId = req.user?.id;
+
+  const data = await userService.uploadProfileImage(userId,file);
+
+  res.send(formatterUserData(data));
+ } catch (error) {
+  res.status(500).send(error.message)
+ }
+ 
+}
+export {createUser,getAllUsers,getUserById,updateUser,deleteUser,uploadProfileImage}

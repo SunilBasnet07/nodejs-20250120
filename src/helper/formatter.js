@@ -4,6 +4,7 @@ export const formatterUserData = (data) => {
         name: data.name,
         email: data.email,
         number: data.number,
+        profileImageUrl:data.profileImageUrl,
         roles: data.roles,
         createdAt: data.createdAt
     }

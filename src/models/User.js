@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         minlength: 8,
     },
+    profileImageUrl: String,
     roles: {
         type: [String],
         uppercase: true,

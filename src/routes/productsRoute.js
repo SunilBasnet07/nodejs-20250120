@@ -7,10 +7,10 @@ import { ADMIN_ROLES } from "../constant/roles.js";
 const router = express.Router();
 
 router.get("/",auth ,getAllProducts);
-router.get("/:id",getProductById);
-router.get("/categories",getCategories);
-router.post("/",createProduct);
-router.put("/:id",updateProduct);
+router.get("/:id",auth,getProductById);
+router.get("/categories",auth,getCategories);
+router.post("/",auth,createProduct);
+router.put("/:id",auth,roleBasedAuth(ADMIN_ROLES),updateProduct);
 router.delete("/:id",auth,roleBasedAuth(ADMIN_ROLES),deleteProduct);
 
 export default router;

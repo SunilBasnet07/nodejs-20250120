@@ -6,14 +6,18 @@ import authRoute from "./routes/authRoute.js"
 import bodyParser from "body-parser"
 import connectDB from "./config/database.js";
 import logger from "./middlewares/logger.js";
+import multer from "multer";
+import connectCloudinary from "./config/cloudinary.js";
 
 
 const app = express();
 app.use(logger);
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 dotenv.config();
 connectDB();
+connectCloudinary();
+const upload = multer({ storage: multer.memoryStorage(), })
 const PORT = process.env.PORT ;
 
 app.get("/",(req,res)=>{
@@ -25,7 +29,7 @@ app.get("/",(req,res)=>{
 })
 
 app.use("/api/products",productsRoute)
-app.use("/api/users",usersRoute)
+app.use("/api/users",upload.single("image"),usersRoute)
 app.use("/api/auth",authRoute)
 
 app.listen(PORT,()=>{

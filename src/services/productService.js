@@ -14,12 +14,15 @@ const getCategories = async ()=>{
     return await Product.distinct("category");
  }
 
-const createProduct= async(data)=>{
-    return await Product.create(data);
+const createProduct= async(data,userId)=>{
+    return await Product.create({...data,createdBy:userId});
 
 } 
 const updateProduct = async (id,data)=>{
-   return await Product.findByIdAndUpdate(id,data);
+    
+    
+
+   return await Product.findByIdAndUpdate(id,data,{new:true});
 }
 const deleteProduct = async (id)=>{
     return await Product.findByIdAndDelete(id);

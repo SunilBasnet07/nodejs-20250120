@@ -31,7 +31,10 @@ const register = async (req, res) => {
         if (password != confirmPassword) return res.send("Password and ConfirmPassword do not matched")
         if (!PASSWORD_REGEX.test(password)) return res.status(500).send("Password must be contain uppercase lowercase number and special character.")
         const user = await authService.register(req.body)
-        res.json(user);
+        const formatterData = formatterUserData(user);
+        const token = createJwt(formatterData);
+        res.cookie("authToken",token);
+        res.json(formatterData);
 
     } catch (error) {
         res.status(500).send(error.message);
