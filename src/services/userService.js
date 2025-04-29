@@ -18,9 +18,9 @@ const deleteUser = async (id) => {
     return await User.findByIdAndDelete(id);
 }
 const uploadProfileImage = async (userId,file) => {
-    const uploadedFile = await uploadfile(file);
+    const uploadedFile = await uploadfile([file]);
     return await User.findByIdAndUpdate(userId,{
-        profileImageUrl:uploadedFile?.url
+        profileImageUrl:uploadedFile[0]?.url
     },{new:true});
 }
 

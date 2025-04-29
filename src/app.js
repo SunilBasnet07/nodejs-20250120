@@ -24,11 +24,12 @@ app.get("/",(req,res)=>{
   res.json({
     "name": "nodejs-20250120",
     "version": "1.0.0",
-    "port":"500",
+    "port":PORT,
+    "author":"Sunil Basnet"
   })
 })
 
-app.use("/api/products",productsRoute)
+app.use("/api/products",upload.array("images",5),productsRoute);
 app.use("/api/users",upload.single("image"),usersRoute)
 app.use("/api/auth",authRoute)
 

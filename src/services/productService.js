@@ -1,5 +1,6 @@
 
 import Product from "../models/Product.js";
+import uploadfile from "../utils/file.js";
 
 
 
@@ -14,15 +15,16 @@ const getCategories = async ()=>{
     return await Product.distinct("category");
  }
 
-const createProduct= async(data,userId)=>{
-    return await Product.create({...data,createdBy:userId});
+const createProduct= async(userId,data,files)=>{
+    const uploadFiles= await uploadfile(files);
+    return await Product.create({...data,createdBy:userId,imageUrls:uploadFiles.map((item)=>item.url)});
 
 } 
-const updateProduct = async (id,data)=>{
-    
+const updateProduct = async (id,data,files)=>{
+    const uploadFiles =await uploadfile(files);
     
 
-   return await Product.findByIdAndUpdate(id,data,{new:true});
+   return await Product.findByIdAndUpdate(id,{...data,imageUrls:uploadFiles.map((item)=>item.url)},{new:true});
 }
 const deleteProduct = async (id)=>{
     return await Product.findByIdAndDelete(id);
