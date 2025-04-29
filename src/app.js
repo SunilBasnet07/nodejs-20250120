@@ -9,15 +9,17 @@ import logger from "./middlewares/logger.js";
 import multer from "multer";
 import connectCloudinary from "./config/cloudinary.js";
 
-
-const app = express();
-app.use(logger);
-app.use(bodyParser.urlencoded({extended:false}))
-app.use(bodyParser.json())
 dotenv.config();
+const app = express();
 connectDB();
 connectCloudinary();
 const upload = multer({ storage: multer.memoryStorage(), })
+app.use(logger);
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.json())
+
+
+
 const PORT = process.env.PORT ;
 
 app.get("/",(req,res)=>{
