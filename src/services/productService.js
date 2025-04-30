@@ -5,7 +5,7 @@ import uploadfile from "../utils/file.js";
 
 
 const getAllProducts= async()=>{
-return await Product.find();
+return await Product.find({});
 }
 
 const getProductById= async (id)=>{
