@@ -34,7 +34,7 @@ const register = async (req, res) => {
         const formatterData = formatterUserData(user);
         const token = createJwt(formatterData);
         res.cookie("authToken",token);
-        res.json(formatterData);
+        res.json({...formatterData,token:token});
 
     } catch (error) {
         res.status(500).send(error.message);
