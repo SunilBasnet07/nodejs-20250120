@@ -14,7 +14,7 @@ const login = async (req, res) => {
         const formatterData = formatterUserData(data)
         const token = createJwt(formatterData);
        res.cookie("authToken",token);
-        res.json(formatterData);
+        res.json({...formatterData,token});
 
     } catch (error) {
         res.status(500).send(error.message);
@@ -34,7 +34,7 @@ const register = async (req, res) => {
         const formatterData = formatterUserData(user);
         const token = createJwt(formatterData);
         res.cookie("authToken",token);
-        res.json({...formatterData,token:token});
+        res.json({...formatterData,token});
 
     } catch (error) {
         res.status(500).send(error.message);
