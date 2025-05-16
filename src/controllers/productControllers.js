@@ -5,6 +5,7 @@ const getAllProducts = async (req, res) => {
   const products = await productService.getAllProducts();
   res.json(products);
 };
+
 const getProductById = async (req, res) => {
   const id = req.params.id;
   const product = await productService.getProductById(id);

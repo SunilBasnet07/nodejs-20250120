@@ -10,6 +10,14 @@ const userSchema = new mongoose.Schema({
         minlength: 3,
         maxlength: 30,
     },
+    address: {
+        city: String,
+        province: String,
+        country: {
+            type: String,
+            default: "Nepal",
+        }
+    },
     email: {
         type: String,
         required: true,
@@ -44,7 +52,7 @@ const userSchema = new mongoose.Schema({
         type: [String],
         uppercase: true,
         default: [USER_ROLES],
-        enum:[USER_ROLES,MERCHANT_ROLES,ADMIN_ROLES]
+        enum: [USER_ROLES, MERCHANT_ROLES, ADMIN_ROLES]
 
     },
     createdAt: {

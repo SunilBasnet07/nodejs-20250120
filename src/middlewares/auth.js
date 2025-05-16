@@ -3,7 +3,7 @@ import { verifyJWT } from "../utils/jwt.js";
 
 const auth = async (req, res, next) => {
     const cookie = req.headers.cookie;
-    if (!cookie) return res.status(401).send("user Unauthorized")
+    if (!cookie) return res.status(401).send("User Unauthorized")
     const authToken = cookie.split("=")[1];
 
    verifyJWT(authToken).then((data)=>{

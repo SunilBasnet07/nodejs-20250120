@@ -5,6 +5,7 @@ import bcrypt from "bcrypt"
 const login = async (data) => {
 
     const user = await User.findOne({ email: data.email });
+    if(!user) throw new Error("User not found.");
     const isPasswordMatched = bcrypt.compareSync(data.password, user.password);
     if (!isPasswordMatched) {
         throw {
@@ -13,7 +14,7 @@ const login = async (data) => {
         }
     }
 
-    if (!user) throw new Error("User not found.");
+    
 
 
     return user;

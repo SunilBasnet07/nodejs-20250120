@@ -8,6 +8,7 @@ const getAllProducts= async()=>{
 return await Product.find({});
 }
 
+
 const getProductById= async (id)=>{
 return await Product.findById(id);
 }
@@ -31,4 +32,4 @@ const deleteProduct = async (id)=>{
  }
 
 
-export default {getAllProducts,getProductById,createProduct,updateProduct,deleteProduct,getCategories }
+export default {getAllProducts,getProductById,createProduct,updateProduct,deleteProduct,getCategories}
